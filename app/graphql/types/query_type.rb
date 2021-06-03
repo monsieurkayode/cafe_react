@@ -4,14 +4,21 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
+    field :menus, [Types::MenuType], null: true do
+      description "Return a list of menus"
+      
+      def resolve(obj, args, ctx)
+        Menu.order('created_at DESC').limit(25)
+      end
+    end
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+    field :menu, Types::MenuType, null: true do
+      description "Fetch a menu item"
+      argument :id, ID, required: true
+      
+      def resolve(obj, args, ctx)
+        Menu.find(args[:id])
+      end
     end
   end
 end

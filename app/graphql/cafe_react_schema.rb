@@ -2,6 +2,14 @@ class CafeReactSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 
+  rescue_from ActiveRecord::RecordNotFound do |ex|
+    nil
+  end
+  
+  rescue_from StandardError do |ex|
+    raise GraphQL::ExecutionError.new(ex.message)
+  end
+
   # Union and Interface Resolution
   def self.resolve_type(abstract_type, obj, ctx)
     # TODO: Implement this function
