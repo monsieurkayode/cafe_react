@@ -15,6 +15,8 @@ class Menu < ApplicationRecord
     fish: 10
   }
 
-  validates_presence_of :price, :type
-  validates :name, presence: true, uniqueness: true
+  validates_presence_of :price, :type, :name
+  validates_uniqueness_of :name, scope: :type
+
+  default_scope { order('created_at DESC') }
 end

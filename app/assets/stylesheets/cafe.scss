@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import 'semantic-ui-css/semantic.min.css';
+@import 'react-toastify/dist/ReactToastify.css';
 @import 'partials/variables';
 @import 'partials/functions';
 @import 'partials/mixins';
@@ -72,4 +73,8 @@ header {
 
 .ui.card {
   margin: 0;
+}
+
+.clickable {
+  cursor: pointer;
 }

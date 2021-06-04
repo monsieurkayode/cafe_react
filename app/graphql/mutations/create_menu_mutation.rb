@@ -5,14 +5,14 @@ module Mutations
     argument :menu_input, Mutations::MenuInput, required: true
 
     field :menu, Types::MenuType, null: true
-    field :errors, [String], null: true
+    field :errors, Types::BaseScalar, null: true
 
     def resolve(menu_input:)
       menu = Menu.new(menu_input.to_h)
       if menu.save
         { menu: menu }
       else
-        { errors: menu.errors.full_messages }
+        { errors: menu.errors.to_h }
       end
     end
   end

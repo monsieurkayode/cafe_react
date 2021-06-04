@@ -8,7 +8,7 @@ module Types
       description "Return a list of menus"
       
       def resolve(obj, args, ctx)
-        Menu.order('created_at DESC').limit(25)
+        Menu.limit(25)
       end
     end
 
@@ -18,6 +18,14 @@ module Types
       
       def resolve(obj, args, ctx)
         Menu.find(args[:id])
+      end
+    end
+
+    field :types, [String], null: true do
+      description "Fetch a menu types"
+      
+      def resolve(obj, args, ctx)
+        Menu.types.keys
       end
     end
   end

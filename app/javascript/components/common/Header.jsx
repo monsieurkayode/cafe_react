@@ -8,9 +8,8 @@ export const Header = ({ history }) => (
       <div
         role="link"
         tabIndex="0"
-        id="brand"
         onClick={() => history.push('/')}
-        className="uppercase"
+        className="uppercase clickable"
       >
         Cafe React
       </div>

@@ -63,7 +63,7 @@ const MenuItem = ({ name, price, type, photoUrl }) => {
 			></div>
 			<div className="content">
 				<div className="left">
-					<div className="uppercase type">{type}</div>
+					<div className="uppercase type">{type.split('_').join(' ')}</div>
 					<div className="capitalize name">{name}</div>
 				</div>
 				<div className="right price">&#36;&nbsp;{price}</div>
