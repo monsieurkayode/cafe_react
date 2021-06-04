@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Button } from "semantic-ui-react";
+import MenusQuery from '../queries/menus';
 
 const Card = styled.div`
 	min-width: 360px;
@@ -50,7 +52,15 @@ const Card = styled.div`
 	}
 `;
 
-const MenuItem = ({ name, price, type, photoUrl }) => {
+const MenuItem = ({ id, name, price, type, photoUrl, deleteMenu }) => {
+	const handleDelete = (id) => {
+		deleteMenu({ 
+      variables: { input: { id } },
+      refetchQueries: [{ query: MenusQuery }],
+			awaitRefetchQueries: true,
+    });
+	};
+
 	return (
 		<Card>
 			<div
@@ -60,10 +70,18 @@ const MenuItem = ({ name, price, type, photoUrl }) => {
 						photoUrl || "https://via.placeholder.com/400"
 					})`,
 				}}
-			></div>
+			>
+				<Button
+					icon="trash"
+					color="youtube"
+					size="tiny"
+					floated="right"
+					onClick={() => handleDelete(id)}
+				/>
+			</div>
 			<div className="content">
 				<div className="left">
-					<div className="uppercase type">{type.split('_').join(' ')}</div>
+					<div className="uppercase type">{type.split("_").join(" ")}</div>
 					<div className="capitalize name">{name}</div>
 				</div>
 				<div className="right price">&#36;&nbsp;{price}</div>

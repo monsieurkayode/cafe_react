@@ -1,10 +1,11 @@
 import React from "react";
 import { graphql } from "react-apollo";
 import MenusQueryRaw from "../queries/menus";
+import DeleteMenuMutation from '../mutations/deleteMenu';
 
 import MenuItem from "./MenuItem";
 
-const Menus = ({ data }) => {
+const Menus = ({ data, mutate }) => {
 	if (data.loading) {
 		return null;
 	}
@@ -12,7 +13,7 @@ const Menus = ({ data }) => {
 	return (
 		<div style={{ marginTop: "4rem" }} className="container">
 			{data.menus.map((menu) => (
-				<MenuItem key={menu.id} {...menu} />
+				<MenuItem key={menu.id} {...menu} deleteMenu={mutate} />
 			))}
 		</div>
 	);
@@ -20,4 +21,4 @@ const Menus = ({ data }) => {
 
 const Query = graphql(MenusQueryRaw);
 
-export default Query(Menus);
+export default Query(DeleteMenuMutation(Menus));
