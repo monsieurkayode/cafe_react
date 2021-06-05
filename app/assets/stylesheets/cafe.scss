@@ -1,0 +1,80 @@
+// Place all the styles related to the Cafe controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'semantic-ui-css/semantic.min.css';
+@import 'react-toastify/dist/ReactToastify.css';
+@import 'partials/variables';
+@import 'partials/functions';
+@import 'partials/mixins';
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  background: #f6f6f6;
+}
+
+body {
+  position: relative;
+  background-color: #f6f6f6;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100vh;
+  min-width: 1440px;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  max-width: 1320px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 8rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+header {
+  @include header();
+  background: $background-white;
+  margin: 0 auto;
+  position: fixed;
+  width: 100%;
+}
+
+.text__bold {
+  font-weight: 700;
+}
+
+.text__medium_bold {
+  font-weight: 500;
+}
+
+.text__medium {
+  font-weight: 400;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.ui.card {
+  margin: 0;
+}
+
+.clickable {
+  cursor: pointer;
+}

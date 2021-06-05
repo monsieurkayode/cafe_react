@@ -1,0 +1,32 @@
+%flex__container {
+  display: flex;
+}
+
+%flex__container_column {
+  @extend %flex__container;
+  flex-direction: column;
+}
+
+%flex__container_row {
+  @extend %flex__container;
+  flex-direction: row;
+}
+
+%nowrap {
+  flex-wrap: nowrap;
+}
+
+@mixin header {
+  @extend %flex__container_row;
+  @extend %nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: px-to-rem(12px) px-to-rem(60px);
+  min-height: 60px;
+  user-select: none;
+
+  @media only screen and (min-width: 1800px) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
