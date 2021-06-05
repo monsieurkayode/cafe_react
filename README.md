@@ -1,24 +1,26 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Installation
 
-Things you may want to cover:
+### Prerequisites
+* You will need to have ruby version 2.5.1 already installed or install using a ruby version manager such as rvm or rbenv
+* Postgres
+* yarn
 
-* Ruby version
+* Clone this repository by running the command
+`git clone https://github.com/monsieurkayode/cafe_react.git`
 
-* System dependencies
+* After successfully cloning the project:
+`cd cafe_react`
 
-* Configuration
+* To Install dependecies.
+`bundle install`
 
-* Database creation
+* Create database
+  - Provide ENV variables for database username and password in `config/database.yml`
+  - Run `rake db:setup` to create, run migrations and seed the database
 
-* Database initialization
+### Starting the app
+* To start the app locally run the following commands 
+`rails s` followed by `bin/webpack-dev-server`
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
