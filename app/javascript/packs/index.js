@@ -9,7 +9,7 @@ import apollo from "../utils/apollo";
 import store from '../store';
 
 import Cafe from '../pages/Cafe';
-import AddMenu from '../pages/AddUpdateMenu';
+import AddUpdateMenu from '../pages/AddUpdateMenu';
 
 render(
 	<Provider store={store}>
@@ -17,8 +17,7 @@ render(
       <BrowserRouter>
         <ToastContainer hideProgressBar={true} />
         <Switch>
-          <Route exact path='/new' component={AddMenu} />
-          <Route exact path='/:id' component={AddMenu} />
+          <Route exact path={['/new', '/:id']} component={AddUpdateMenu} />
           <Route exact path='/' component={Cafe} />
         </Switch>
       </BrowserRouter>
