@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { withRouter } from 'react-router-dom';
 import { Button } from "semantic-ui-react";
 import MenusQuery from '../queries/menus';
 
@@ -52,7 +53,7 @@ const Card = styled.div`
 	}
 `;
 
-const MenuItem = ({ id, name, price, type, photoUrl, deleteMenu }) => {
+const MenuItem = ({ id, name, price, type, photoUrl, deleteMenu, history }) => {
 	const handleDelete = (id) => {
 		deleteMenu({ 
       variables: { input: { id } },
@@ -62,7 +63,7 @@ const MenuItem = ({ id, name, price, type, photoUrl, deleteMenu }) => {
 	};
 
 	return (
-		<Card>
+		<Card onClick={() => history.push(`/${id}`)}>
 			<div
 				className="header"
 				style={{
@@ -76,7 +77,7 @@ const MenuItem = ({ id, name, price, type, photoUrl, deleteMenu }) => {
 					color="youtube"
 					size="tiny"
 					floated="right"
-					onClick={() => handleDelete(id)}
+					onClick={(e) => {handleDelete(id); e.stopPropagation()}}
 				/>
 			</div>
 			<div className="content">
@@ -90,4 +91,4 @@ const MenuItem = ({ id, name, price, type, photoUrl, deleteMenu }) => {
 	);
 };
 
-export default MenuItem;
+export default withRouter(MenuItem);

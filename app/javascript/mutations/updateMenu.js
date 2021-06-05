@@ -1,9 +1,9 @@
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 
-export const CreateMenuMutationRaw = gql`
-	mutation createMenu($input: CreateMenuMutationInput!) {
-    createMenu(input: $input) {
+export const UpdateMenuMutationRaw = gql`
+	mutation updateMenu($input: UpdateMenuMutationInput!) {
+    updateMenu(input: $input) {
       menu {
         id
         name
@@ -17,4 +17,4 @@ export const CreateMenuMutationRaw = gql`
   }
 `;
 
-export default graphql(CreateMenuMutationRaw);
+export default graphql(UpdateMenuMutationRaw);

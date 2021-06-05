@@ -1,14 +1,17 @@
 import React from "react";
-import { Grid, Button, Header, Form, Message } from "semantic-ui-react";
+import { Grid, Button, Header, Form } from "semantic-ui-react";
 import { toast } from "react-toastify";
+import { useQuery, useMutation } from "react-apollo";
 import Hero from "../components/common/Header";
 import TypesQuery from "../queries/types";
 import MenusQuery from "../queries/menus";
-import CreateMenuMutation from "../mutations/createMenu";
+import { MenuQueryRaw } from "../queries/menu";
+import { CreateMenuMutationRaw } from "../mutations/createMenu";
+import { UpdateMenuMutationRaw } from "../mutations/updateMenu";
 
 import { formFields } from "../utils/validations";
 
-const AddMenu = ({ data, mutate, history }) => {
+const AddUpdateMenu = ({ history, data, match }) => {
 	let typeOptions = [];
 	const initialState = {
 		name: "",
@@ -27,40 +30,61 @@ const AddMenu = ({ data, mutate, history }) => {
 
 	const [errors, setErrors] = React.useState({});
 	const [menuInput, updateMenuInput] = React.useState(initialState);
+	const [prefetched, setPrefetched] = React.useState(false);
 	const [formValid, setFormValid] = React.useState(false);
+	const fetchMenuResponse = useQuery(MenuQueryRaw, {
+		variables: { id: match.params.id },
+		skip: !match.params.id,
+	});
+	const [updateMenu] = useMutation(UpdateMenuMutationRaw);
+	const [createMenu] = useMutation(CreateMenuMutationRaw);
 	const handleInputChange = (field, value) =>
 		updateMenuInput((prevState) => ({ ...prevState, [field]: value }));
 
+	const handleSubmit = () => {
+		setErrors({});
+
+		const mutation = menuInput.id
+			? { operation: updateMenu, dataKey: "updateMenu" }
+			: { operation: createMenu, dataKey: "createMenu" };
+
+		const { __typename, ...rest } = menuInput;
+
+		mutation
+			.operation({
+				variables: { input: { menuInput: rest } },
+				refetchQueries: [{ query: MenusQuery }],
+				awaitRefetchQueries: true,
+			})
+			.then(({ data }) => {
+				if (Object.keys(data[mutation.dataKey].errors || {}).length) {
+					toast.dismiss();
+					toast.error(
+						Object.entries(data[mutation.dataKey].errors).map(
+							([key, value]) =>
+								`${key[0].toUpperCase()}${key.slice(1)} ${value}`
+						)[0]
+					);
+					setErrors(data[mutation.dataKey].errors);
+				} else {
+					history.push("/");
+				}
+			});
+	};
+
 	React.useEffect(() => {
+		if (!prefetched && fetchMenuResponse.data && fetchMenuResponse.data.menu) {
+			setPrefetched(true);
+			updateMenuInput(fetchMenuResponse.data.menu);
+		}
+
 		setFormValid(
 			!formFields.some(
 				(formField) =>
 					!menuInput[formField.field].toString().trim() && formField.required
 			)
 		);
-	}, [menuInput]);
-
-	const handleSubmit = () => {
-		setErrors({});
-
-		mutate({
-			variables: { input: { menuInput } },
-			refetchQueries: [{ query: MenusQuery }],
-			awaitRefetchQueries: true,
-		}).then(({ data: { createMenu } }) => {
-			if (Object.keys(createMenu.errors || {}).length) {
-				toast.dismiss();
-				toast.error(
-					Object.entries(createMenu.errors).map(
-						([key, value]) => `${key[0].toUpperCase()}${key.slice(1)} ${value}`
-					)[0]
-				);
-				setErrors(createMenu.errors);
-			} else {
-				history.push("/");
-			}
-		});
-	};
+	}, [menuInput, fetchMenuResponse.loading]);
 
 	return (
 		<Grid>
@@ -70,7 +94,9 @@ const AddMenu = ({ data, mutate, history }) => {
 					className="container"
 					style={{ justifyContent: "space-between", padding: "0 12px" }}
 				>
-					<Header as="h3">Add Menu Item</Header>
+					<Header as="h3">
+						{match.params.id ? "Update" : "Add"} Menu Item
+					</Header>
 				</div>
 				<Form className="container">
 					<Form.Field>
@@ -141,7 +167,7 @@ const AddMenu = ({ data, mutate, history }) => {
 							primary
 							disabled={!formValid}
 						>
-							Add Item
+							{match.params.id ? "Update" : "Add"} Item
 						</Button>
 					</div>
 				</Form>
@@ -150,4 +176,4 @@ const AddMenu = ({ data, mutate, history }) => {
 	);
 };
 
-export default TypesQuery(CreateMenuMutation(AddMenu));
+export default TypesQuery(AddUpdateMenu);
