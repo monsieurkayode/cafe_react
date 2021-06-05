@@ -76,11 +76,8 @@ GEM
     diff-lcs (1.4.4)
     erubi (1.10.0)
     execjs (2.8.1)
-    factory_girl (4.9.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.9.0)
-      factory_girl (~> 4.9.0)
-      railties (>= 3.0.0)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
     ffaker (2.18.0)
     ffi (1.15.1)
     globalid (0.4.2)
@@ -226,7 +223,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.2)
   database_cleaner
-  factory_girl_rails
+  factory_bot
   ffaker
   graphiql-rails
   graphql
@@ -235,7 +232,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rails (~> 5.2.3)
-  rspec-rails (~> 3.5)
+  rspec-rails
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)
