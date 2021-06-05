@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Button, Header, Form } from "semantic-ui-react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from "react-apollo";
+import { PickerOverlay } from "filestack-react";
 import Hero from "../components/common/Header";
 import TypesQuery from "../queries/types";
 import MenusQuery from "../queries/menus";
@@ -32,6 +33,7 @@ const AddUpdateMenu = ({ history, data, match }) => {
 	const [menuInput, updateMenuInput] = React.useState(initialState);
 	const [prefetched, setPrefetched] = React.useState(false);
 	const [formValid, setFormValid] = React.useState(false);
+	const [pickerOpen, setPickerOpen] = React.useState(false);
 	const fetchMenuResponse = useQuery(MenuQueryRaw, {
 		variables: { id: match.params.id },
 		skip: !match.params.id,
@@ -156,7 +158,42 @@ const AddUpdateMenu = ({ history, data, match }) => {
 								<label>Photo</label>
 							</Grid.Column>
 							<Grid.Column>
-								<Form.Button type="file" primary content="Choose Photo" />
+								{pickerOpen && (
+									<PickerOverlay
+										apikey={"AVQhMhx3SmO8Wb8w4N5oJz"}
+										pickerOptions={{
+											accept: ["image/*"],
+											maxFiles: 1,
+											storeTo: {
+												location: "s3",
+											},
+										}}
+										onSuccess={(result) => {
+											handleInputChange(
+												"photoUrl",
+												result.filesUploaded[0].url
+											);
+											setPickerOpen(false);
+										}}
+										onError={() => {
+											setErrors({
+												photoUrl: "There was an error uploading the file",
+											});
+											setPickerOpen(false);
+										}}
+									/>
+								)}
+
+								<Form.Button
+									primary
+									onClick={() => setPickerOpen(true)}
+									content={
+										menuInput.photoUrl
+											? menuInput.photoUrl.substr(1, 10) + "..."
+											: "Choose Photo"
+									}
+									icon={menuInput.photoUrl ? "check circle outline" : "upload"}
+								/>
 							</Grid.Column>
 						</Grid>
 					</Form.Field>
