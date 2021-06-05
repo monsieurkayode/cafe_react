@@ -24,3 +24,5 @@
 * To start the app locally run the following commands 
 `rails s` followed by `bin/webpack-dev-server`
 
+### Run tests
+* run `rspec` command in terminal
