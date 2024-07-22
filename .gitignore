@@ -3,5 +3,6 @@ tmp
 log
 .DS_Store
 .vscode
+.nvmrc
 .byebug_history
 public/packs
