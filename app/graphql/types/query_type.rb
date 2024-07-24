@@ -1,32 +1,42 @@
+# frozen_string_literal: true
+
 module Types
   class QueryType < Types::BaseObject
-    # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
-    include GraphQL::Types::Relay::HasNodeField
-    include GraphQL::Types::Relay::HasNodesField
-
-    field :menus, [Types::MenuType], null: true do
-      description "Return a list of menus"
-      
-      def resolve(obj, args, ctx)
-        Menu.limit(25)
-      end
+    field :node, Types::NodeType, null: true, description: "Fetches an object given its ID." do
+      argument :id, ID, required: true, description: "ID of the object."
     end
 
-    field :menu, Types::MenuType, null: true do
-      description "Fetch a menu item"
-      argument :id, ID, required: true
-      
-      def resolve(obj, args, ctx)
-        Menu.find(args[:id])
-      end
+    def node(id:)
+      context.schema.object_from_id(id, context)
     end
 
-    field :types, [String], null: true do
-      description "Fetch a menu types"
-      
-      def resolve(obj, args, ctx)
-        Menu.types.keys
-      end
+    field :nodes, [Types::NodeType, null: true], null: true, description: "Fetches a list of objects given a list of IDs." do
+      argument :ids, [ID], required: true, description: "IDs of the objects."
+    end
+
+    def nodes(ids:)
+      ids.map { |id| context.schema.object_from_id(id, context) }
+    end
+
+    # Add root-level fields here.
+    # They will be entry points for queries on your schema.
+
+    field :menus, [Types::MenuType], null: false,
+      description: "Return a list of menus"
+    def menus
+      Menu.limit(25)
+    end
+
+    field :menu, Types::MenuType, null: true, description: "Fetch a menu item" do
+      argument :id, ID, required: true, description: "ID of the menu "
+    end
+    def menu(id:)
+      Menu.find(id)
+    end
+
+    field :types, [String], null: false, description: "Fetch a menu types"
+    def types
+      Menu.types.keys
     end
   end
 end
