@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ApolloProvider } from "react-apollo";
@@ -11,7 +11,10 @@ import store from '../store';
 import Cafe from '../pages/Cafe';
 import AddUpdateMenu from '../pages/AddUpdateMenu';
 
-render(
+const container = document.querySelector("#root")
+const root = createRoot(container)
+
+root.render(
 	<Provider store={store}>
 		<ApolloProvider client={apollo()}>
       <BrowserRouter>
@@ -22,6 +25,5 @@ render(
         </Switch>
       </BrowserRouter>
     </ApolloProvider>
-	</Provider>,
-	document.querySelector("#root")
+	</Provider>
 );
