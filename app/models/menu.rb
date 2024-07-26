@@ -20,3 +20,16 @@ class Menu < ApplicationRecord
 
   default_scope { order('created_at DESC') }
 end
+
+# == Schema Information
+#
+# Table name: menus
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  photo_url  :string
+#  price      :decimal(10, 2)
+#  type       :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
