@@ -1,0 +1,42 @@
+name: Github Actions test
+on:
+  push:
+    branches: [ main, base/** ]
+  pull_request:
+    branches: [ main, base/** ]
+
+env:
+  RUBY_VERSION: 2.6.7
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - name: Configure test DB
+        run: |
+          RAILS_ENV=${{ env.RAILS_ENV }} bundle exec rails db:create
+          RAILS_ENV=${{ env.RAILS_ENV }} bundle exec rails db:schema:load
+      - name: Run RSpec tests
+        run: bundle exec rspec --format documentation
