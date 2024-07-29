@@ -57,6 +57,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
+  gem 'rubocop', '~> 1.50', require: false
+  gem 'rubocop-rspec', '~> 2.20'
+  gem 'rubocop-graphql', '~> 1.1'
+  gem 'rubocop-performance', '~> 1.17'
+  gem 'rubocop-rails', '~> 2.19', require: false
 end
 
 group :console do
