@@ -18,3 +18,18 @@ AllCops:
     - 'db/schema.rb'
   TargetRubyVersion: 2.6
   SuggestExtensions: false
+
+Style/Documentation:
+  Enabled: false
+
+GraphQL/ArgumentDescription:
+  Enabled: false
+
+GraphQL/OrderedArguments:
+  Enabled: false
+
+GraphQL/ObjectDescription:
+  Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
