@@ -31,5 +31,8 @@ GraphQL/OrderedArguments:
 GraphQL/ObjectDescription:
   Enabled: false
 
+GraphQL/FieldDescription:
+  Enabled: false
+
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
