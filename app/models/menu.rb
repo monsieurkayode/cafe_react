@@ -1,7 +1,7 @@
 class Menu < ApplicationRecord
   self.inheritance_column = :_type_disabled
 
-  enum type: { 
+  enum type: {
     main_course: 0,
     side: 1,
     appetizer: 2,
