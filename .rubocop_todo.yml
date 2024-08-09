@@ -21,15 +21,6 @@ GraphQL/FieldDefinitions:
   Exclude:
     - 'app/graphql/types/query_type.rb'
 
-# Offense count: 14
-GraphQL/FieldDescription:
-  Exclude:
-    - 'app/graphql/mutations/create_menu_mutation.rb'
-    - 'app/graphql/mutations/delete_menu_mutation.rb'
-    - 'app/graphql/mutations/update_menu_mutation.rb'
-    - 'app/graphql/types/menu_type.rb'
-    - 'app/graphql/types/mutation_type.rb'
-
 # Offense count: 1
 # Configuration parameters: Include.
 # Include: **/graphql/**/*_schema.rb
