@@ -22,7 +22,7 @@ module Types
     # They will be entry points for queries on your schema.
 
     field :menus, [Types::MenuType], null: false,
-      description: "Return a list of menus"
+                                     description: "Return a list of menus"
     def menus
       Menu.limit(25)
     end
