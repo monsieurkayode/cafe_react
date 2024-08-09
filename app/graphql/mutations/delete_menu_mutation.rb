@@ -4,8 +4,8 @@ module Mutations
 
     argument :id, ID, required: true
 
-    field :menu, Types::MenuType, null: true
     field :errors, [String], null: true
+    field :menu, Types::MenuType, null: true
 
     def resolve(id:)
       menu = Menu.find(id)

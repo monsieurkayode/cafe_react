@@ -4,8 +4,8 @@ module Mutations
   
     argument :menu_input, Mutations::MenuInput, required: true
 
-    field :menu, Types::MenuType, null: true
     field :errors, Types::BaseScalar, null: true
+    field :menu, Types::MenuType, null: true
 
     def resolve(menu_input:)
       menu = Menu.new(menu_input.to_h)
