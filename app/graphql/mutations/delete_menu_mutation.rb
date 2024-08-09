@@ -1,6 +1,6 @@
 module Mutations
   class DeleteMenuMutation < Mutations::BaseMutation
-    description "Delete a single menu item"
+    description 'Delete a single menu item'
 
     argument :id, ID, required: true
 

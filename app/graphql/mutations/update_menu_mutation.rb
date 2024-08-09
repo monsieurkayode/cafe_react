@@ -1,6 +1,6 @@
 module Mutations
   class UpdateMenuMutation < Mutations::BaseMutation
-    description "Update a single menu item"
+    description 'Update a single menu item'
 
     argument :menu_input, Mutations::MenuInput, required: true
 

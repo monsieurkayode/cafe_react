@@ -2,16 +2,17 @@
 
 module Types
   class QueryType < Types::BaseObject
-    field :node, Types::NodeType, null: true, description: "Fetches an object given its ID." do
-      argument :id, ID, required: true, description: "ID of the object."
+    field :node, Types::NodeType, null: true, description: 'Fetches an object given its ID.' do
+      argument :id, ID, required: true, description: 'ID of the object.'
     end
 
     def node(id:)
       context.schema.object_from_id(id, context)
     end
 
-    field :nodes, [Types::NodeType, null: true], null: true, description: "Fetches a list of objects given a list of IDs." do
-      argument :ids, [ID], required: true, description: "IDs of the objects."
+    field :nodes, [Types::NodeType, null: true], null: true,
+                                                 description: 'Fetches a list of objects given a list of IDs.' do
+      argument :ids, [ID], required: true, description: 'IDs of the objects.'
     end
 
     def nodes(ids:)
@@ -22,19 +23,19 @@ module Types
     # They will be entry points for queries on your schema.
 
     field :menus, [Types::MenuType], null: false,
-                                     description: "Return a list of menus"
+                                     description: 'Return a list of menus'
     def menus
       Menu.limit(25)
     end
 
-    field :menu, Types::MenuType, null: true, description: "Fetch a menu item" do
-      argument :id, ID, required: true, description: "ID of the menu "
+    field :menu, Types::MenuType, null: true, description: 'Fetch a menu item' do
+      argument :id, ID, required: true, description: 'ID of the menu '
     end
     def menu(id:)
       Menu.find(id)
     end
 
-    field :types, [String], null: false, description: "Fetch a menu types"
+    field :types, [String], null: false, description: 'Fetch a menu types'
     def types
       Menu.types.keys
     end
