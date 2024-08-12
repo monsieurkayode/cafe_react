@@ -1,4 +1,4 @@
-name: Github Actions test
+name: Github Actions Tests
 on:
   push:
     branches: [ main, base/** ]
@@ -12,8 +12,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
     services:
       postgres:
         image: postgres:15

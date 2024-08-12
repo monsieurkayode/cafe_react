@@ -1,7 +1,7 @@
 class Menu < ApplicationRecord
   self.inheritance_column = :_type_disabled
 
-  enum type: { 
+  enum type: {
     main_course: 0,
     side: 1,
     appetizer: 2,
@@ -15,8 +15,9 @@ class Menu < ApplicationRecord
     fish: 10
   }
 
-  validates_presence_of :price, :type, :name
-  validates_uniqueness_of :name, scope: :type
+  validates :price, :type, :name, presence: true
+  # TODO: (@monsieurkayode) Add unique index
+  validates :name, uniqueness: { scope: :type }
 
   default_scope { order('created_at DESC') }
 end

@@ -1,0 +1,26 @@
+name: Rubocop Linter 👮🏽
+on: [ pull_request ]
+
+env:
+  RUBY_VERSION: 2.6.7
+
+jobs:
+  linters:
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_ONLY: rubocop
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - name: Lint Ruby files
+        uses: reviewdog/action-rubocop@v2
+        with:
+          reporter: github-pr-review # Default is github-pr-check
+          level: warning
+          skip_install: true
+          use_bundler: true

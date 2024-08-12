@@ -1,11 +1,11 @@
 module Mutations
   class DeleteMenuMutation < Mutations::BaseMutation
-    description "Delete a single menu item"
+    description 'Delete a single menu item'
 
     argument :id, ID, required: true
 
-    field :menu, Types::MenuType, null: true
     field :errors, [String], null: true
+    field :menu, Types::MenuType, null: true
 
     def resolve(id:)
       menu = Menu.find(id)
