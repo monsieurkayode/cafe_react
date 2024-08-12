@@ -7,6 +7,8 @@ env:
 jobs:
   linters:
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_ONLY: rubocop
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -15,7 +17,10 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - name: Generate binstubs
-        run: bundle binstubs rubocop
       - name: Lint Ruby files
-        run: bin/rubocop --parallel
+        uses: reviewdog/action-rubocop@v2
+        with:
+          reporter: github-pr-review # Default is github-pr-check
+          level: warning
+          skip_install: true
+          use_bundler: true
