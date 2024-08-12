@@ -15,8 +15,8 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - name: Security audit dependencies
-        uses: tomferreira/action-bundler-audit@v1
+      - name: Security audit dependencies with bundler-audit
+        uses: tomferreira/action-bundler-audit@v1.2
         with:
           bundler_audit_version: gemfile
           reporter: github-pr-review

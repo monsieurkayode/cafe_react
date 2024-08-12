@@ -1,4 +1,4 @@
-name: Github Actions test
+name: Github Actions Tests
 on:
   push:
     branches: [ main, base/** ]
