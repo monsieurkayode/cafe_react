@@ -5,12 +5,8 @@ env:
   RUBY_VERSION: 2.6.7
 
 jobs:
-  brakeman:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-latest ]
-    runs-on: ${{ matrix.os }}
+  bundler_audit:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,7 +15,8 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - name: Generate binstubs
-        run: bundle binstubs bundler-audit
       - name: Security audit dependencies
-        run: bin/bundler-audit --update
+        uses: tomferreira/action-bundler-audit@v1
+        with:
+          bundler_audit_version: gemfile
+          reporter: github-pr-review
