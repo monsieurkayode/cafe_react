@@ -1,4 +1,4 @@
-name: Brakeman (PR Review) 👨🏼‍🔧
+name: Brakeman (PR Review) 🐶
 on: [ pull_request ]
 
 env:
@@ -6,11 +6,7 @@ env:
 
 jobs:
   brakeman:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-latest ]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
