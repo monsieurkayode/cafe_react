@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  tests:
     strategy:
       fail-fast: false
       matrix:
