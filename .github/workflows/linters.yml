@@ -1,0 +1,25 @@
+name: Rubocop Linter 👮🏽
+on: [ pull_request ]
+
+env:
+  RUBY_VERSION: 2.6.7
+
+jobs:
+  lint:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - name: Generate binstubs
+        run: bundle binstubs rubocop
+      - name: Lint Ruby files
+        run: bin/rubocop --parallel
