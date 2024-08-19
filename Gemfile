@@ -46,6 +46,7 @@ group :development, :test do
   gem 'factory_bot', '!= 6.4.5'
   gem 'ffaker'
   gem 'graphiql-rails'
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
 end
 
