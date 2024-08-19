@@ -38,7 +38,7 @@ RSpec.describe Menu do
       end
     end
 
-    context 'should be invalid if price is blank' do
+    context 'when price is blank' do
       let(:menu) { build(:menu, price: nil) }
 
       it { is_expected.not_to be_valid }
@@ -50,7 +50,7 @@ RSpec.describe Menu do
       end
     end
 
-    context 'should be valid if no photo is uploaded' do
+    context 'when no photo is uploaded' do
       let(:menu) { build(:menu, photo_url: nil) }
 
       it { is_expected.to be_valid }
