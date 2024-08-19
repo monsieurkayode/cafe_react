@@ -44,6 +44,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot', '!= 6.4.5'
+  gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'graphiql-rails'
   gem 'rails-controller-testing'
