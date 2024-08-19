@@ -19,7 +19,9 @@ RSpec.describe Menu do
 
       it { is_expected.not_to be_valid }
       it 'raises and ActiveRecord::RecordInvalid error' do
-        expect { subject.save! }.to raise_error(ActiveRecord::RecordInvalid).with_message('Validation failed: Name can\'t be blank')
+        expect { subject.save! }.to raise_error(
+          ActiveRecord::RecordInvalid
+        ).with_message('Validation failed: Name can\'t be blank')
       end
     end
 
@@ -28,7 +30,9 @@ RSpec.describe Menu do
 
       it { is_expected.not_to be_valid }
       it 'raises and ActiveRecord::RecordInvalid error' do
-        expect { subject.save! }.to raise_error(ActiveRecord::RecordInvalid).with_message('Validation failed: Type can\'t be blank')
+        expect { subject.save! }.to raise_error(
+          ActiveRecord::RecordInvalid
+        ).with_message('Validation failed: Type can\'t be blank')
       end
     end
 
@@ -37,7 +41,9 @@ RSpec.describe Menu do
 
       it { is_expected.not_to be_valid }
       it 'raises and ActiveRecord::RecordInvalid error' do
-        expect { subject.save! }.to raise_error(ActiveRecord::RecordInvalid).with_message('Validation failed: Price can\'t be blank')
+        expect { subject.save! }.to raise_error(
+          ActiveRecord::RecordInvalid
+        ).with_message('Validation failed: Price can\'t be blank')
       end
     end
 
