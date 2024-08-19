@@ -2,9 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe CafeController, type: :controller do
+RSpec.describe CafeController do
   describe 'GET #index' do
-    before { get :index }
+    before(:each) { get :index }
 
     it 'renders the index template' do
       expect(response).to render_template(:index)
