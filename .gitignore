@@ -12,3 +12,6 @@ public/packs
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+.env
+.ruby-version
+.nvmrc

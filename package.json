@@ -1,8 +1,12 @@
 {
   "name": "cafe-react",
+  "version": "1.0.0",
+  "author": "Kayode Adeola (https://github.com/monsieurkayode)",
+  "license": "MIT",
   "engines": {
     "node": "^18",
-    "npm": "^8"
+    "npm": "^8",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "bin/webpack-dev-server",

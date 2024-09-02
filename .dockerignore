@@ -1,0 +1,52 @@
+# Include any files or directories that you don't want to be copied to your
+# container here (e.g., local build artifacts, temporary files, etc.).
+#
+# For more help, visit the .dockerignore file reference guide at
+# https://docs.docker.com/go/build-context-dockerignore/
+
+.bin
+.DS_Store
+.dockerignore
+.env
+.byebug_history
+.git
+git
+.gitignore
+.vscode
+.nvmrc
+.rspec
+.ruby_lsp
+
+# Ignore node_modules
+node_modules
+
+# Ignore yarn files
+yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+# Ignore all logfiles and tempfiles.
+tmp
+log
+!/log/.keep
+!/tmp/.keep
+
+# Ignore precompiled javascript packs
+/public/packs
+/public/packs-test
+/public/assets
+
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+
+## Documentation cache and generated files:
+/.yardoc/
+/_yardoc/
+/doc/
+/rdoc/
+
+config/master.key
+/.bundle
+/vendor/bundle
+LICENSE
+README.md
