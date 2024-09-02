@@ -16,9 +16,6 @@ git
 .nvmrc
 .rspec
 .ruby_lsp
-docker-compose*
-compose.y*ml
-Dockerfile*
 
 # Ignore node_modules
 node_modules
