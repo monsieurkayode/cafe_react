@@ -1,4 +1,4 @@
-name: Github Actions Tests
+name: Github Actions Tests 🧪
 on:
   push:
     branches: [ main, base/** ]
@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  tests:
+  specs:
     strategy:
       fail-fast: false
       matrix:
