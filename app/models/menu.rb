@@ -17,7 +17,7 @@ class Menu < ApplicationRecord
 
   validates :price, :type, :name, presence: true
   # TODO: (@monsieurkayode) Add unique index
-  validates :name, uniqueness: { scope: :type }
+  validates :type, uniqueness: { scope: :name }
 
   default_scope { order('created_at DESC') }
 end
@@ -33,4 +33,8 @@ end
 #  type       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_menus_on_name_and_type  (name,type) UNIQUE
 #
