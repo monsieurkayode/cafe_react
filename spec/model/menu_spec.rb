@@ -38,6 +38,19 @@ RSpec.describe Menu do
       end
     end
 
+    context 'when type already exists for menu name' do
+      let(:name) { :samosa }
+      let(:type) { :appetizer }
+      let!(:menu) { create(:menu, name: name, type: type) }
+      let(:duplicate_menu_type) { build(:menu, name: name, type: type) }
+
+      it 'raises and ActiveRecord::RecordInvalid error' do
+        expect { duplicate_menu_type.save! }.to raise_error(
+          ActiveRecord::RecordInvalid
+        ).with_message('Validation failed: Type has already been taken')
+      end
+    end
+
     context 'when price is blank' do
       let(:menu) { build(:menu, price: nil) }
 
